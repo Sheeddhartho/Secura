@@ -1,0 +1,26 @@
+<%- include('partials/header', {title: 'Register'}) %>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Create New Account</h2>
+        
+        <% if (error) { %>
+            <div class="alert alert-danger" style="background-color: rgba(220, 53, 69, 0.3); border: 1px solid #dc3545; color: #f8d7da; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;"><%= error %></div>
+        <% } %>
+
+        <form action="/signup" method="POST">
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control-custom" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control-custom" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-custom" style="width: 100%;">Create Account</button>
+        </form>
+        <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="/login">Login here</a>.</p>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

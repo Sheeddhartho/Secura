@@ -1,0 +1,22 @@
+<%- include('partials/header', {title: 'Camera Mode'}) %>
+
+<div class="container" style="text-align: center;">
+    <div class="card-custom" style="max-width: 600px; margin: 2rem auto;">
+        <h2><span style="color:var(--accent-green)">//</span> Camera Mode Active</h2>
+        <p class="text-secondary" style="margin-top: 1rem;">This device is now streaming its video feed. Keep this page open to maintain the connection.</p>
+        
+        <div style="margin-top: 2rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 5px;">
+            <p style="margin:0;">Status: <span id="status" style="color: var(--accent-green); font-weight: bold;">Initializing...</span></p>
+        </div>
+
+        <!-- Hidden video and canvas elements for processing -->
+        <video id="video" width="640" height="480" autoplay muted style="display: none;"></video>
+        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    </div>
+</div>
+
+<!-- Socket.io and camera script -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/camera.js"></script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,482 @@
+/* --- FONT IMPORT --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+/* --- CSS VARIABLES (THEME) --- */
+:root {
+    --bg-dark: #0d1117;
+    --bg-card: rgba(30, 41, 59, 0.5); /* Semi-transparent dark blue-grey */
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent-green: #00ff8c;
+    --accent-green-dark: #00b362;
+    --accent-glow: rgba(0, 255, 140, 0.5);
+    --border-color: rgba(0, 255, 140, 0.2);
+    --danger-color: #dc3545;
+    --font-primary: 'Roboto', sans-serif;
+    --font-headings: 'Orbitron', sans-serif;
+}
+
+/* --- BASE & GLOBAL STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px var(--accent-glow);
+}
+
+a {
+    color: var(--accent-green);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-green-dark);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--bg-dark);
+}
+::-webkit-scrollbar-track {
+    background-color: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-green-dark);
+    border-radius: 10px;
+    border: 2px solid var(--bg-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-green);
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: rgba(13, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25rem 2rem;
+}
+
+.navbar-brand {
+    font-family: var(--font-headings);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-green) !important;
+    text-shadow: 0 0 10px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-logo {
+    fill: var(--accent-green);
+    filter: drop-shadow(0 0 3px var(--accent-glow));
+}
+
+.nav-link {
+    color: var(--text-primary) !important;
+    font-family: var(--font-headings);
+    margin-left: 1rem;
+    padding: 0.5rem 0 !important;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-green) !important;
+    border-bottom-color: var(--accent-green);
+}
+
+.navbar-toggler {
+    border: 1px solid var(--border-color);
+}
+.navbar-toggler:focus {
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+.navbar-toggler-icon-custom {
+    color: var(--accent-green);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* --- CUSTOM COMPONENTS (Buttons, Cards, Forms) --- */
+.btn-custom {
+    background: linear-gradient(45deg, var(--accent-green), var(--accent-green-dark));
+    color: var(--bg-dark);
+    font-family: var(--font-headings);
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--accent-glow);
+    text-transform: uppercase;
+}
+
+.btn-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--accent-glow);
+}
+
+.btn-custom-secondary {
+    background: transparent;
+    border: 1px solid var(--accent-green);
+    color: var(--accent-green);
+    font-family: var(--font-headings);
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-secondary:hover {
+    background: var(--accent-green);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.card-custom, .form-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 4rem auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-family: var(--font-headings);
+}
+
+.form-control-custom {
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid var(--text-secondary);
+    border-radius: 5px;
+    padding: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* --- PAGE-SPECIFIC STYLES --- */
+
+/* Landing Page */
+.hero-section {
+    text-align: center;
+    padding: 6rem 0;
+}
+.hero-section h1 {
+    font-size: 4rem;
+    background: -webkit-linear-gradient(45deg, var(--accent-green), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 1.5rem auto 2.5rem;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Dashboard Choice Page */
+.choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.choice-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+.choice-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+.choice-card .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Monitor Page */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+.video-container {
+    position: relative;
+    background-color: #000;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.video-container img, .video-container video {
+    width: 100%;
+    display: block;
+}
+.video-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.status-indicator-off, .status-indicator-on {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-family: var(--font-headings);
+}
+.status-indicator-off { background-color: var(--danger-color); color: white; }
+.status-indicator-on { background-color: var(--accent-green); color: var(--bg-dark); text-shadow: none; }
+
+.log-panel {
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column-reverse; /* Newest logs on top */
+}
+.log-entry {
+    background: var(--bg-card);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 3px solid var(--text-secondary);
+}
+.log-entry.log-alert { border-left-color: var(--danger-color); }
+.log-entry.log-allow { border-left-color: var(--accent-green); }
+
+.known-face-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--accent-green);
+}
+.known-face-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+.known-face-details { flex-grow: 1; }
+.known-face-details h5 { margin: 0; font-size: 1.1rem; }
+
+/* Custom Radio Buttons as Toggle */
+.action-select label.btn-custom-secondary {
+    opacity: 0.5;
+}
+.action-select input[type="radio"]:checked + label.btn-custom-secondary {
+    opacity: 1;
+    background: var(--accent-green);
+    color: var(--bg-dark);
+}
+
+
+/* Custom Toggle Switch */
+.switch-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-glow); }
+input:checked + .slider:before { transform: translateX(26px); }
+
+/* Modal for Webcam */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.modal-video-container {
+    position: relative;
+    width: fit-content;
+    margin: 1rem auto;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .form-container {
+        margin: 2rem auto;
+    }
+}
+
+/* ADD OR MODIFY THESE RULES IN YOUR public/css/style.css */
+
+/* ADD OR MODIFY THESE RULES IN YOUR public/css/style.css */
+
+/* --- Log Panel --- */
+.log-panel {
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    /* This ensures a top-to-bottom flow */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Adds space between log entries */
+    overflow-y: auto; /* This is the key for scrolling */
+}
+
+.log-entry {
+    background: var(--bg-card);
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-left: 3px solid var(--text-secondary);
+}
+.log-entry.log-alert { border-left-color: var(--danger-color); }
+.log-entry.log-allow { border-left-color: var(--accent-green); }
+
+
+/* --- Known Face Card Styles --- */
+.known-face-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--accent-green);
+}
+
+.known-face-icon {
+    font-size: 2.5rem;
+    color: var(--text-secondary);
+}
+
+.known-face-details {
+    flex-grow: 1;
+}
+
+.known-face-details h5 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.known-face-details p {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.known-face-card .delete-btn {
+    background-color: transparent;
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.known-face-card .delete-btn:hover {
+    background-color: var(--danger-color);
+    color: white;
+    border-color: var(--danger-color);
+    box-shadow: none;
+}
+
+/* ADD THESE RULES TO THE END of public/css/style.css */
+
+/* --- Media Controls --- */
+.media-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Style for the stop button when it's in a recording state */
+.btn-custom-secondary.recording {
+    background: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+}
+
+.btn-custom-secondary.recording:hover {
+    background: #a52834; /* Darker red on hover */
+    border-color: #a52834;
+}

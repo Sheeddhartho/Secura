@@ -1,0 +1,137 @@
+<%- include('partials/header', {title: 'System Monitor'}) %>
+
+<div id="loader" class="loader" style="color: var(--accent-green); text-shadow: 0 0 10px var(--accent-glow);">Loading System Models...</div>
+
+<div class="container monitor-container" style="display: none;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h2>System Monitor & Control</h2>
+        <p class="text-secondary">Real-time feed analysis and system management.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Left Column: Video Feed & Logs -->
+        <div class="main-feed-panel">
+            <div class="card-custom mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3><span style="color:var(--accent-green)">//</span> Live Feed</h3>
+                    <span id="cameraStatusIndicator" class="status-indicator-off">OFFLINE</span>
+                </div>
+                <div class="video-container">
+                    <img id="liveFeed" src="" alt="Live feed is offline" style="width: 100%; background-color: #000; min-height: 400px; border-radius: 8px;">
+                    <canvas id="canvas"></canvas>
+                </div>
+                
+                <!-- NEW: Media Controls section for Recording -->
+                <div class="media-controls mt-3">
+                    <button id="startRecordingBtn" class="btn-custom-secondary">Start Recording</button>
+                    <button id="stopRecordingBtn" class="btn-custom-secondary recording" style="display: none;">Stop Recording</button>
+                </div>
+                
+                <hr style="border-color: var(--border-color); margin: 1.5rem 0;">
+
+                <div class="switch-container">
+                    <label for="showPointsToggle" class="form-label">Show Facial Points</label>
+                    <label class="switch">
+                        <input type="checkbox" id="showPointsToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- NEW: Alert for Unknown Faces toggle -->
+                <div class="switch-container">
+                    <label for="alertUnknownToggle" class="form-label">Alert for Unknown Faces</label>
+                    <label class="switch">
+                        <input type="checkbox" id="alertUnknownToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="card-custom">
+                <h3><span style="color:var(--accent-green)">//</span> Detection Log</h3>
+                <div id="log-panel" class="log-panel mt-3" style="height: 300px;">
+                    <!-- Log entries will be added here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Management & Registration -->
+        <div class="controls-panel">
+            <div class="card-custom">
+                <h3><span style="color:var(--accent-green)">//</span> Register New Face</h3>
+                
+                <div class="registration-methods mt-3">
+                    <button id="openCameraBtn" class="btn-custom-secondary">Capture via Webcam</button>
+                    <label for="imageUpload" class="btn-custom-secondary">Upload Image</label>
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                </div>
+
+                <div id="analysis-container" class="video-container" style="display:none; margin-top: 1.5rem;">
+                    <img id="imagePreview" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image for analysis"/>
+                    <canvas id="analysisCanvas"></canvas>
+                </div>
+
+                <div id="registration-form" style="display: none; margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label for="nameInput" class="form-label">Person's Name</label>
+                        <input type="text" id="nameInput" class="form-control-custom" placeholder="Enter name...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Action</label>
+                        <div class="d-flex gap-3 action-select">
+                            <input type="radio" id="actionAlert" name="action" value="alert" checked style="display:none;">
+                            <label for="actionAlert" class="btn-custom-secondary flex-grow-1">Alert</label>
+                            
+                            <input type="radio" id="actionAllow" name="action" value="allow" style="display:none;">
+                            <label for="actionAllow" class="btn-custom-secondary flex-grow-1">Allow</label>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button id="saveButton" class="btn-custom flex-grow-1">Save Person</button>
+                        <button id="cancelButton" class="btn-custom-secondary">Cancel</button>
+                    </div>
+                </div>
+                
+                <h3 class="mt-4"><span style="color:var(--accent-green)">//</span> Registered People</h3>
+                <div id="faceList" class="mt-3" style="max-height: 400px; overflow-y: auto;">
+                    <!-- Known face cards will be inserted here by JS -->
+                </div>
+                
+                <h3 class="mt-4"><span style="color:var(--accent-green)">//</span> System Settings</h3>
+                <div class="data-management mt-3">
+                    <button id="downloadDataBtn" class="btn-custom-secondary">Download Data</button>
+                    <label for="importDataInput" class="btn-custom-secondary">Import Data</label>
+                    <input type="file" id="importDataInput" accept=".json" style="display: none;">
+                </div>
+                <div class="settings-management mt-3">
+                    <label for="alertThresholdInput" class="form-label">WhatsApp Alert Cooldown</label>
+                    <div class="d-flex gap-2">
+                         <input type="number" id="alertThresholdInput" class="form-control-custom" min="1" value="100">
+                         <button id="saveSettingsBtn" class="btn-custom">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Registration Camera -->
+<div id="cameraModal" class="modal-overlay" style="display:none;">
+    <div class="card-custom" style="max-width: 600px;">
+        <h3>Register Face</h3>
+        <p class="text-secondary">Position face in the center and click 'Capture'.</p>
+        <div class="modal-video-container">
+            <video id="modal-video" width="500" height="385" autoplay muted></video>
+            <canvas id="modal-canvas"></canvas>
+        </div>
+        <div class="modal-controls">
+            <button id="snapBtn" class="btn-custom">Capture</button>
+            <button id="closeModalBtn" class="btn-custom-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script defer src="/js/monitor.js"></script>
+<%- include('partials/footer') %>
